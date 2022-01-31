@@ -9,19 +9,18 @@ class SensorCollector(Collector):
 
         # Get I2C bus
         self._bus = smbus.SMBus(1)
-        
-        # SHT30 address, 0x44(68)
-        # Send measurement command, 0x2C(44)
-        #		0x06(06)	High repeatability measurement
-        self._bus.write_i2c_block_data(0x44, 0x2C, [0x06])
-
-        time.sleep(0.5)
 
     # We don't need this
     def run_task(self):
         pass
 
     def get_data(self):
+        # SHT30 address, 0x44(68)
+        # Send measurement command, 0x2C(44)
+        #		0x06(06)	High repeatability measurement
+        self._bus.write_i2c_block_data(0x44, 0x2C, [0x06])
+
+        time.sleep(0.5)
         
         # SHT30 address, 0x44(68)
         # Read data back from 0x00(00), 6 bytes
