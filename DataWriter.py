@@ -21,3 +21,7 @@ class DataWriter:
         insert_str += f"{data[-1]})"
         self._cursor.execute(insert_str)
         self._db.commit()
+
+    def stop(self):
+        self._cursor.close()
+        self._db.close()

@@ -1,5 +1,6 @@
 import logging
 import time
+import GlobalConfig
 
 from Collector import Collector
 from INA219 import  INA219
@@ -21,7 +22,7 @@ class UPSCollector(Collector):
 
     def run_task(self):
         logging.info(f"{self.name} started.")
-        while (True):
+        while (not GlobalConfig.is_exit):
             self._bus_voltage = self._ina219.getBusVoltage_V()
             self._current = self._ina219.getCurrent_mA()
             self._power = self._ina219.getPower_W()
