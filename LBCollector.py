@@ -1,10 +1,8 @@
 import datetime
 import logging
 import os
-import signal
 import time
 from threading import Thread
-from xml.dom.minidom import parseString
 
 import GlobalConfig
 from DataWriter import DataWriter
