@@ -1,7 +1,10 @@
+import datetime
 import logging
+import os
 import time
 from threading import Thread
 
+from DataWriter import DataWriter
 from FanCollector import FanCollector
 from UPSCollector import UPSCollector
 from SensorCollector import SensorCollector
@@ -9,17 +12,26 @@ from SensorCollector import SensorCollector
 LOG_FORMAT = "%(levelname)s - %(message)s"
 logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT)
 
-def timer(collectors, database, interval):
+def timer(collectors, db_path, interval):
+    if (not os.path.exists(db_path)):
+        data_dicts = {}
+        for c in collectors:
+            data_dicts[c.name] = c.data_dict
+        database = DataWriter(db_path, data_dicts)
+    else:
+        database = DataWriter(db_path)
+
     while (True):
         logging.info("Timer: Collecting data.")
         for c in collectors:
-            data = c.get_data()
-            print(data)
+            data = list(c.get_data().values())
+            data.insert(0, "'" + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "'")
+            database.write(c.name, data)      
 
         time.sleep(interval)
 
 class LBCollector:
-    def __init__(self):
+    def __init__(self, db_path):
         self.collectors = [
             FanCollector(),
             UPSCollector(),
@@ -27,7 +39,7 @@ class LBCollector:
         ]
 
         self.collect_interval = 10
-        self.database = None
+        self.database = db_path
 
     def run(self):
         logging.info("Starting collector threads.")
@@ -49,4 +61,4 @@ class LBCollector:
 
 
 if (__name__ == "__main__"):
-    LBCollector().run()
+    LBCollector("test.db").run()
