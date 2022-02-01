@@ -7,6 +7,10 @@ from Collector import Collector
 class FanCollector(Collector):
     def __init__(self):
         super().__init__("FanCollector")
+        self.data_dict = {
+            "cpu_temp": "FLOAT",
+            "fan_speed": "FLOAT"
+        }
 
         # Fan GPIO Pin
         self._FAN_GPIO = 12

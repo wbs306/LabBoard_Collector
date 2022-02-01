@@ -6,6 +6,10 @@ from Collector import Collector
 class SensorCollector(Collector):
     def __init__(self):
         super().__init__("SensorCollector", False)
+        self.data_dict = {
+            "temperature": "FLOAT",
+            "humidity": "FLOAT"
+        }
 
         # Get I2C bus
         self._bus = smbus.SMBus(1)

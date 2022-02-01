@@ -7,6 +7,11 @@ from INA219 import  INA219
 class UPSCollector(Collector):
     def __init__(self):
         super().__init__("UPSCollector")
+        self.data_dict = {
+            "voltage": "FLOAT",
+            "current": "FLOAT",
+            "power": "FLOAT"
+        }
 
         self._ina219 = INA219(addr=0x42)
 
