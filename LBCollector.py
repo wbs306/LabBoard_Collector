@@ -1,6 +1,7 @@
 import datetime
 import logging
 import os
+import subprocess
 import time
 from threading import Thread
 
@@ -61,13 +62,17 @@ class LBCollector:
         threads.append(timer_thread)
 
         try:
-            while (True):
+            while (not GlobalConfig.is_exit):
                 pass
         except KeyboardInterrupt:
             GlobalConfig.is_exit = True
             logging.info("Waiting, timer is closing the database...")
+        finally:
             while (timer_thread.isAlive()):
                 pass
+        
+        if (GlobalConfig.is_using_battery):
+            subprocess.call(["shutdown", "now"])
 
 
 if (__name__ == "__main__"):

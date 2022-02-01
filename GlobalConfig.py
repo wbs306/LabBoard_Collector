@@ -9,6 +9,8 @@ db_path = "test.db"
 
 
 # UPSCollector
+is_using_battery = False
+
 # Check battery using state per battery_checkk_interval second
 battery_check_interval = 5
 
