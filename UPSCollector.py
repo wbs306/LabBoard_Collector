@@ -24,7 +24,7 @@ class UPSCollector(Collector):
         logging.info(f"{self.name} started.")
         while (not GlobalConfig.is_exit):
             self._bus_voltage = self._ina219.getBusVoltage_V()
-            self._current = self._ina219.getCurrent_mA()
+            self._current = self._ina219.getCurrent_mA() / 1000
             self._power = self._ina219.getPower_W()
             p = (self._bus_voltage - 6)/2.4*100
             if (p > 100):p = 100
