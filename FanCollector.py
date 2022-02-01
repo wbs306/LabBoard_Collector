@@ -1,3 +1,4 @@
+from ast import Global
 import RPi.GPIO as gpio
 import logging
 import time
@@ -13,26 +14,20 @@ class FanCollector(Collector):
             "fan_speed": "FLOAT"
         }
 
-        # Fan GPIO Pin
-        self._FAN_GPIO = 12
-
-        # Start the fan when CPU temperature hit TEMP_MIN
-        self._TEMP_MIN = 30
-
-        # Full running the fan when CPU temperature hit TEMP_MAX
-        self._TEMP_MAX = 50
+        self._FAN_GPIO = GlobalConfig.fan_gpio
+        self._TEMP_MIN = GlobalConfig.temp_min
+        self._TEMP_MAX = GlobalConfig.temp_max
 
         gpio.setwarnings(False)
         gpio.setmode(gpio.BCM)
         gpio.setup(self._FAN_GPIO, gpio.OUT)
 
-        # The frequency of PWM
-        self._pwm_freq = 75
+        self._pwm_freq = GlobalConfig.pwm_freq
         self._pwm = gpio.PWM(self._FAN_GPIO, self._pwm_freq)
         self._pwm.start(0)
 
         # To check the CPU temperature per _check_interval second
-        self._check_interval = 15
+        self._check_interval = GlobalConfig.check_interval
         self._fan_speed = 0
         self._cpu_temp = 0
 

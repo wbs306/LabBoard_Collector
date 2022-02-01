@@ -34,7 +34,7 @@ class UPSCollector(Collector):
                 # TODO do something when using battery
                 pass
 
-            time.sleep(2)
+            time.sleep(GlobalConfig.battery_check_interval)
 
     def get_data(self):
         return {
