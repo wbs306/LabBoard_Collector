@@ -1,4 +1,3 @@
-from ast import Global
 import RPi.GPIO as gpio
 import logging
 import time
