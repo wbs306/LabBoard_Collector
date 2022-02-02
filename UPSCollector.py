@@ -34,6 +34,7 @@ class UPSCollector(Collector):
             if (p < 0):p = 0
 
             if (self._current < -0.2):
+                GlobalConfig.is_using_battery = True
                 GlobalConfig.is_exit = True
 
             time.sleep(UPSCollectorConfig.battery_check_interval)
