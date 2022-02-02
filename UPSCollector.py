@@ -1,7 +1,8 @@
 import logging
 import time
-import GlobalConfig
 
+import GlobalConfig
+from GlobalConfig import UPSCollectorConfig
 from Collector import Collector
 from INA219 import  INA219
 
@@ -33,7 +34,7 @@ class UPSCollector(Collector):
             if (self._current < -0.2):
                 GlobalConfig.is_exit = True
 
-            time.sleep(GlobalConfig.battery_check_interval)
+            time.sleep(UPSCollectorConfig.battery_check_interval)
 
     def get_data(self):
         return {

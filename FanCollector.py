@@ -3,6 +3,7 @@ import logging
 import time
 
 import GlobalConfig
+from GlobalConfig import FanCollectorConfig
 from Collector import Collector
 
 class FanCollector(Collector):
@@ -13,20 +14,20 @@ class FanCollector(Collector):
             "fan_speed": "FLOAT"
         }
 
-        self._FAN_GPIO = GlobalConfig.fan_gpio
-        self._TEMP_MIN = GlobalConfig.temp_min
-        self._TEMP_MAX = GlobalConfig.temp_max
+        self._FAN_GPIO = FanCollectorConfig.fan_gpio
+        self._TEMP_MIN = FanCollectorConfig.temp_min
+        self._TEMP_MAX = FanCollectorConfig.temp_max
 
         gpio.setwarnings(False)
         gpio.setmode(gpio.BCM)
         gpio.setup(self._FAN_GPIO, gpio.OUT)
 
-        self._pwm_freq = GlobalConfig.pwm_freq
+        self._pwm_freq = FanCollectorConfig.pwm_freq
         self._pwm = gpio.PWM(self._FAN_GPIO, self._pwm_freq)
         self._pwm.start(0)
 
         # To check the CPU temperature per _check_interval second
-        self._check_interval = GlobalConfig.check_interval
+        self._check_interval = FanCollectorConfig.check_interval
         self._fan_speed = 0
         self._cpu_temp = 0
 
