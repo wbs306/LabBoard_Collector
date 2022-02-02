@@ -1,10 +1,6 @@
 is_exit = False
 is_using_battery = False
 
-# LBCollector
-# Collect data per collect_interval second
-collect_interval = 10
-
 # Path to database file
 db_path = "test.db"
 
@@ -12,9 +8,13 @@ class UPSCollectorConfig:
     # Check battery using state per battery_checkk_interval second
     battery_check_interval = 5
 
+    collect_interval = 3600
+
 class FanCollectorConfig:
     # Check CPU temperature per check_interval second
     check_interval = 15
+
+    collect_interval = 10
 
     # Fan GPIO Pin
     fan_gpio = 12
@@ -27,3 +27,6 @@ class FanCollectorConfig:
 
     # The frequency of PWM
     pwm_freq = 75
+
+class SensorCollectorConfig:
+    collect_interval = 1800

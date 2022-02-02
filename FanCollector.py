@@ -31,6 +31,8 @@ class FanCollector(Collector):
         self._fan_speed = 0
         self._cpu_temp = 0
 
+        self.collect_interval = FanCollectorConfig.collect_interval
+
     def run_task(self):
         logging.info(f"{self.name} started.")
         while (GlobalConfig.is_exit):

@@ -21,6 +21,8 @@ class UPSCollector(Collector):
         self._current = self._ina219.getCurrent_mA()
         self._power = self._ina219.getPower_W()
 
+        self.collect_interval = UPSCollectorConfig.collect_interval
+
     def run_task(self):
         logging.info(f"{self.name} started.")
         while (not GlobalConfig.is_exit):

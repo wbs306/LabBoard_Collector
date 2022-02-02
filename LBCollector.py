@@ -25,13 +25,16 @@ def timer(collectors):
         database = DataWriter(db_path)
 
     while (not GlobalConfig.is_exit):
-        logging.info("Timer: Collecting data.")
         for c in collectors:
+            if (time.time() - c.last_collect < c.collect_interval):
+                continue
+            logging.info(f"Collecting data from {c.name}...")
             data = list(c.get_data().values())
             data.insert(0, "'" + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "'")
-            database.write(c.name, data)      
+            database.write(c.name, data)
+            c.last_collect = time.time()
 
-        time.sleep(GlobalConfig.collect_interval)
+        time.sleep(1)
 
     database.stop()
 

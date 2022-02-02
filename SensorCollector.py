@@ -2,6 +2,7 @@ import smbus
 import time
 
 from Collector import Collector
+from GlobalConfig import SensorCollectorConfig
 
 class SensorCollector(Collector):
     def __init__(self):
@@ -13,6 +14,8 @@ class SensorCollector(Collector):
 
         # Get I2C bus
         self._bus = smbus.SMBus(1)
+
+        self.collect_interval = SensorCollectorConfig.collect_interval
 
     # We don't need this
     def run_task(self):
