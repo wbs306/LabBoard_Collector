@@ -29,4 +29,4 @@ class FanCollectorConfig:
     pwm_freq = 75
 
 class SensorCollectorConfig:
-    collect_interval = 1800
+    collect_interval = 600
