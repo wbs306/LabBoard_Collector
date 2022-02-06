@@ -72,7 +72,7 @@ class LBCollector:
             GlobalConfig.is_exit = True
             logging.info("Waiting, timer is closing the database...")
         finally:
-            while (timer_thread.isAlive()):
+            while (timer_thread.is_alive()):
                 pass
         
         if (GlobalConfig.is_using_battery):
