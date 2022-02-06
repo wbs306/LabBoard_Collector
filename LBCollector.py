@@ -66,6 +66,7 @@ class LBCollector:
 
         try:
             while (not GlobalConfig.is_exit):
+                time.sleep(0.5)
                 pass
         except KeyboardInterrupt:
             GlobalConfig.is_exit = True
