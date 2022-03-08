@@ -17,7 +17,7 @@ class FanCollectorConfig:
     collect_interval = 10
 
     # Fan GPIO Pin
-    fan_gpio = 12
+    fan_gpio = 18
 
     # Start the fan when CPU temperature hit temp_min
     temp_min = 30
