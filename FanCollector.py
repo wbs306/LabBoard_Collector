@@ -35,7 +35,7 @@ class FanCollector(Collector):
 
     def run_task(self):
         logging.info(f"{self.name} started.")
-        while (GlobalConfig.is_exit):
+        while (not GlobalConfig.is_exit):
             with open("/sys/class/thermal/thermal_zone0/temp") as f:
                 self._cpu_temp = float(f.read())
             if self._cpu_temp < self._TEMP_MIN * 1000:
