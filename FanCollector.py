@@ -38,7 +38,7 @@ class FanCollector(Collector):
         while (not GlobalConfig.is_exit):
             with open("/sys/class/thermal/thermal_zone0/temp") as f:
                 self._cpu_temp = float(f.read())
-            if self._cpu_temp < self._TEMP_MIN * 1000:
+            if self._cpu_temp < self._TEMP_MIN * 1000 or GlobalConfig.go_sleep:
                 self._pwm.stop()
                 self._fan_speed = 0
             elif self._cpu_temp > self._TEMP_MAX * 1000:

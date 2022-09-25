@@ -34,6 +34,12 @@ def timer(collectors):
             database.write(c.name, data)
             c.last_collect = time.time()
 
+        now_time = datetime.datetime.now().strftime("%H:%M")
+        if (now_time == GlobalConfig.sleep_time):
+            GlobalConfig.go_sleep = True
+        elif (now_time == GlobalConfig.wakeup_time):
+            GlobalConfig.go_sleep = False
+
         time.sleep(1)
 
     database.stop()

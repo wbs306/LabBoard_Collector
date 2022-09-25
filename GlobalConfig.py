@@ -4,6 +4,11 @@ is_using_battery = False
 # Path to database file
 db_path = "test.db"
 
+sleep_time = "23:30"
+wakeup_time = "08:00"
+
+go_sleep = False
+
 class UPSCollectorConfig:
     # Check battery using state per battery_checkk_interval second
     battery_check_interval = 5
